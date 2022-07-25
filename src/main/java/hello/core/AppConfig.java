@@ -24,12 +24,10 @@ public class AppConfig {
 
     @Bean
     public MemoryMemberRepository memberRepository() {
-        System.out.println("soutm AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
     @Bean
     public DiscountPolicy discountPolicy() {
-        System.out.println("soutm AppConfig.discountPolicy");
         return new RateDiscountPolicy();
     }
     @Bean
