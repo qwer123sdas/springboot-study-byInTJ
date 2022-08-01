@@ -40,4 +40,6 @@ public class AppConfig {
         System.out.println("soutm AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
+
+
 }
