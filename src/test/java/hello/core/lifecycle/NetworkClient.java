@@ -3,7 +3,7 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
     private String url;
 
     public NetworkClient(){
@@ -29,19 +29,17 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close " + url);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public void init() {
         // 프로퍼티의 설정이 끝나면 = 의존관계 주입이 끝나면 설정해 주겠따.
         // 싱글톤 빈이기 때문에 스프링 컨테이너에 올라올 때 생성이 되고, 의존관계 주입이 되면 호출이 됨
-        System.out.println("NetworkClient.afterPropertiesSet");
+        System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메세지");
     }
 
-    @Override
-    public void destroy() throws Exception {
+    public void close() {
         // 스프링 빈이 종료될 때 호출 됨
-        System.out.println("NetworkClient.destroy");
+        System.out.println("NetworkClient.close");
         disconnect();
     }
 }
