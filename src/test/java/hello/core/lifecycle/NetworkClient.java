@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient {
     private String url;
 
@@ -28,7 +31,7 @@ public class NetworkClient {
     public void disconnect(){
         System.out.println("close " + url);
     }
-
+    @PostConstruct
     public void init() {
         // 프로퍼티의 설정이 끝나면 = 의존관계 주입이 끝나면 설정해 주겠따.
         // 싱글톤 빈이기 때문에 스프링 컨테이너에 올라올 때 생성이 되고, 의존관계 주입이 되면 호출이 됨
@@ -36,7 +39,7 @@ public class NetworkClient {
         connect();
         call("초기화 연결 메세지");
     }
-
+    @PreDestroy
     public void close() {
         // 스프링 빈이 종료될 때 호출 됨
         System.out.println("NetworkClient.close");
